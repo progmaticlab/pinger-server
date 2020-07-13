@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  server:
+    build: .
+    command: gunicorn server:app --bind 0.0.0.0:8000 --access-logfile -
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: influxdb
+    volumes:
+      - influxdb:/var/lib/influxdb
+
+  chronograf:
+    image: chronograf
+    command: --influxdb-url=http://db:8086
+    ports:
+      - 8888:8888
+    depends_on:
+      - db
+
+volumes:
+  influxdb:
