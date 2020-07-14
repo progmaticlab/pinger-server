@@ -10,9 +10,10 @@ services:
       - db
   db:
     image: influxdb
+    ports:
+      - 8086:8086
     volumes:
       - influxdb:/var/lib/influxdb
-
   chronograf:
     image: chronograf
     command: --influxdb-url=http://db:8086
