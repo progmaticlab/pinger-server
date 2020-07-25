@@ -16,7 +16,7 @@ do
   pids=""
   for host in $hosts
   do
-    ping -q -c 1 -W 3 $host &> /dev/null &
+    ping -q -c 1 -w 10 $host &> /dev/null &
     pids+=" $!"
   done
   res="{"
